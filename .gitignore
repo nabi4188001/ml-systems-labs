@@ -1,1 +1,19 @@
-echo ".venv/"
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python cache files
+__pycache__/
+*.py[cod]
+
+# IDE files
+.idea/
+.vscode/
+
+# macOS files
+.DS_Store
+
+# Default IDE ignored files
+/shelf/
+/workspace.xml
