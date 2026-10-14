@@ -1,0 +1,3 @@
+Median Forward Pass Time:  0.0514 ms
+Median Backward Pass Time: 0.0755 ms
+Ratio (Backward / Forward): 1.47x
