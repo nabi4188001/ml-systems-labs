@@ -1,0 +1,40 @@
+=== DATA VALIDATION REPORT ===
+
+1. TYPE CHECKS:
+   - age               : ✅ PASS
+   - workclass         : ✅ PASS
+   - fnlwgt            : ✅ PASS
+   - education         : ✅ PASS
+   - education-num     : ✅ PASS
+   - marital-status    : ✅ PASS
+   - occupation        : ✅ PASS
+   - relationship      : ✅ PASS
+   - race              : ✅ PASS
+   - sex               : ✅ PASS
+   - capital-gain      : ✅ PASS
+   - capital-loss      : ✅ PASS
+   - hours-per-week    : ✅ PASS
+   - native-country    : ✅ PASS
+   - income            : ✅ PASS
+
+2. RANGE CHECKS:
+   - age               : ✅ PASS (0 violations in [17, 90])
+   - hours-per-week    : ✅ PASS (0 violations in [1, 99])
+   - capital-gain      : ✅ PASS (0 violations in [0, 99999])
+   - capital-loss      : ✅ PASS (0 violations in [0, 4356])
+
+3. NULL / MISSING VALUE POLICY ('?'):
+   - workclass         : ✅ PASS (No '?' found)
+   - education         : ✅ PASS (No '?' found)
+   - marital-status    : ✅ PASS (No '?' found)
+   - occupation        : ✅ PASS (No '?' found)
+   - relationship      : ✅ PASS (No '?' found)
+   - race              : ✅ PASS (No '?' found)
+   - sex               : ✅ PASS (No '?' found)
+   - native-country    : ✅ PASS (No '?' found)
+   - income            : ✅ PASS (No '?' found)
+
+4. SUMMARY:
+   - Total rows evaluated: 48842
+   - Total columns evaluated: 15
+   - Action taken: Violations reported. NO ROWS DROPPED (per manual instructions).

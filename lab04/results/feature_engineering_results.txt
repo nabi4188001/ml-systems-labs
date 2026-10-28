@@ -1,0 +1,9 @@
+=== FEATURE ENGINEERING RESULTS ===
+
+Baseline 1 (Without Derived Features):
+  - Accuracy: 0.8459
+  - F1 Score: 0.6376
+
+Baseline 2 (With Derived Features: capital_net, hours_per_age):
+  - Accuracy: 0.8546
+  - F1 Score: 0.6624

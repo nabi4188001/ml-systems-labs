@@ -1,0 +1,15 @@
+dataset: UCI Adult
+source: OpenML (name='adult', version=2)
+random_seed: 42
+split_ratio:
+  train: 0.70
+  test: 0.30
+preprocessing:
+  numeric_imputation: median
+  categorical_imputation: most_frequent
+  outlier_clipping: 1st and 99th percentile
+  duplicate_handling: dropped from train only
+  categorical_encoding: one-hot encoded
+data_hashes:
+  X_train_processed: e810bdd2135008c52ed715e44c1bbee887af8d3e9b5e3b60d850c390091435df
+  X_test_processed: 93393bce6f53d944a265225bca91e0f1afbc6520999fce40343a6328fedc2702
