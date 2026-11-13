@@ -1,0 +1,24 @@
+=== TINY MODEL ON make_moons: ENGINE vs PYTORCH ===
+Data: make_moons(n_samples=100, noise=0.1, random_state=42)
+Architecture: 2 -> 8 (ReLU) -> 1 (sigmoid), BCE loss
+Training: full-batch gradient descent, lr=1.0, 100 epochs, float64, same initial weights
+
+Epoch  | Engine loss  | PyTorch loss
+--------------------------------------
+1      | 0.826521     | 0.826521
+10     | 0.380118     | 0.380118
+25     | 0.258295     | 0.258295
+50     | 0.241117     | 0.241117
+75     | 0.237027     | 0.237027
+100    | 0.234912     | 0.234912
+--------------------------------------
+Max abs loss difference over all epochs: 2.78e-16
+Final train accuracy (engine):  0.8700
+Final train accuracy (PyTorch): 0.8700
+
+Training time, 5 runs after 1 warm-up (s):
+  Engine:  7.5998, 7.1965, 7.7714, 7.3803, 7.7043
+  PyTorch: 0.0302, 0.0353, 0.0446, 0.0300, 0.0259
+Median training time (engine):  7.5998 s
+Median training time (PyTorch): 0.0302 s
+Ratio (Engine / PyTorch): 251.7x
