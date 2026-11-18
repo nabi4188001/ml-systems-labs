@@ -1,0 +1,27 @@
+=== TASK 5: SUMMARY BY EFFICIENCY PILLAR (Reddi Ch. 9: data, model, compute, energy) ===
+Accuracy = test set; student accuracy = mean of 3 seeds. Latency = CPU median, 8 threads.
+Data: training samples processed to produce the model (pruned models include the baseline they start from;
+      the distilled student includes the teacher's training).
+Energy (estimates, not measured): CPU = (batch-256 latency / 256) x 15 W assumed package power;
+      MAC = dense MACs executed x 4.6 pJ (arithmetic only, 45 nm fp32).
+
+                             | DATA                               | MODEL                                    | COMPUTE                                      | ENERGY
+Model                        | Samples seen | Labels              | Test acc | Non-zero params | Size          | Dense MACs | Non-zero MACs | b1 (ms) | b256 (ms) | CPU mJ/img | MAC uJ/img
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Baseline BigCNN              | 440       k | hard                | 0.9263   | 1,044,490       | 3.99  MiB dense | 58.8    M | 58.8       M | 0.704   | 109.88    | 6.438      | 270.6
+Global unstructured 90%      | 605       k | hard                | 0.9312   | 104,890         | 1.21  MiB CSR   | 58.8    M | 12.3       M | 0.664   | 108.81    | 6.375      | 270.6
+Layer-wise unstructured 90%  | 605       k | hard                | 0.9084   | 104,891         | 1.21  MiB CSR   | 58.8    M | 5.9        M | 0.664   | 108.81    | 6.375      | 270.6
+Structured 25% filters       | 605       k | hard                | 0.9316   | 738,794         | 2.82  MiB dense | 33.3    M | 33.3       M | 0.579   | 77.98     | 4.569      | 153.1
+Structured 50% filters       | 605       k | hard                | 0.9291   | 463,050         | 1.77  MiB dense | 15.0    M | 15.0       M | 0.347   | 49.20     | 2.883      | 68.8
+Plain student                | 550       k | hard                | 0.9148   | 98,834          | 0.38  MiB dense | 7.4     M | 7.4        M | 0.304   | 38.70     | 2.268      | 34.1
+Distilled student            | 990       k | hard + teacher soft | 0.9181   | 98,834          | 0.38  MiB dense | 7.4     M | 7.4        M | 0.304   | 38.70     | 2.268      | 34.1
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ratios vs baseline:
+Model                        | Acc change | Params  | Size    | MACs    | b256 speed-up | CPU energy
+Global unstructured 90%      | +0.49 pts  | 10.0  x | 3.3   x | 1.0   x | 1.01        x | 1.01x less
+Layer-wise unstructured 90%  | -1.79 pts  | 10.0  x | 3.3   x | 1.0   x | 1.01        x | 1.01x less
+Structured 25% filters       | +0.53 pts  | 1.4   x | 1.4   x | 1.8   x | 1.41        x | 1.41x less
+Structured 50% filters       | +0.28 pts  | 2.3   x | 2.3   x | 3.9   x | 2.23        x | 2.23x less
+Plain student                | -1.15 pts  | 10.6  x | 10.5  x | 7.9   x | 2.84        x | 2.84x less
+Distilled student            | -0.82 pts  | 10.6  x | 10.5  x | 7.9   x | 2.84        x | 2.84x less

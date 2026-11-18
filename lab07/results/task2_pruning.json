@@ -1,0 +1,269 @@
+{
+  "unstructured": [
+    {
+      "scope": "global",
+      "target": 0.0,
+      "sparsity": 0.0,
+      "nonzero_params": 1044490,
+      "acc_before_ft": 0.9263,
+      "acc_after_ft": 0.9305,
+      "ft_time_s": 82.21810995800024,
+      "per_layer": {
+        "conv1": 0.0,
+        "conv2": 0.0,
+        "conv3": 0.0,
+        "conv4": 0.0,
+        "fc1": 0.0,
+        "fc2": 0.0
+      },
+      "effective_macs": 58832640
+    },
+    {
+      "scope": "global",
+      "target": 0.25,
+      "sparsity": 0.25,
+      "nonzero_params": 783490,
+      "acc_before_ft": 0.9265,
+      "acc_after_ft": 0.9305,
+      "ft_time_s": 71.25992220799981,
+      "per_layer": {
+        "conv1": 0.0,
+        "conv2": 0.0743272602558136,
+        "conv3": 0.0963270366191864,
+        "conv4": 0.1181301549077034,
+        "fc1": 0.29278314113616943,
+        "fc2": 0.04531250149011612
+      },
+      "effective_macs": 52717335
+    },
+    {
+      "scope": "global",
+      "target": 0.5,
+      "sparsity": 0.5,
+      "nonzero_params": 522490,
+      "acc_before_ft": 0.9252,
+      "acc_after_ft": 0.9325,
+      "ft_time_s": 73.1986096669998,
+      "per_layer": {
+        "conv1": 0.02083333395421505,
+        "conv2": 0.1829969584941864,
+        "conv3": 0.2300889790058136,
+        "conv4": 0.28173828125,
+        "fc1": 0.5729494690895081,
+        "fc2": 0.109375
+      },
+      "effective_macs": 44255823
+    },
+    {
+      "scope": "global",
+      "target": 0.75,
+      "sparsity": 0.75,
+      "nonzero_params": 261490,
+      "acc_before_ft": 0.922,
+      "acc_after_ft": 0.9331,
+      "ft_time_s": 66.43768008299958,
+      "per_layer": {
+        "conv1": 0.0763888880610466,
+        "conv2": 0.4412434995174408,
+        "conv3": 0.5362412929534912,
+        "conv4": 0.6132609248161316,
+        "fc1": 0.8027493357658386,
+        "fc2": 0.328125
+      },
+      "effective_macs": 26321100
+    },
+    {
+      "scope": "global",
+      "target": 0.9,
+      "sparsity": 0.9,
+      "nonzero_params": 104890,
+      "acc_before_ft": 0.8755,
+      "acc_after_ft": 0.9312,
+      "ft_time_s": 64.1288480409994,
+      "per_layer": {
+        "conv1": 0.1701388955116272,
+        "conv2": 0.7105576992034912,
+        "conv3": 0.79638671875,
+        "conv4": 0.8287624716758728,
+        "fc1": 0.9276309609413147,
+        "fc2": 0.63671875
+      },
+      "effective_macs": 12319932
+    },
+    {
+      "scope": "global",
+      "target": 0.95,
+      "sparsity": 0.95,
+      "nonzero_params": 52690,
+      "acc_before_ft": 0.7015,
+      "acc_after_ft": 0.9232,
+      "ft_time_s": 65.83797387499999,
+      "per_layer": {
+        "conv1": 0.2291666716337204,
+        "conv2": 0.8310004472732544,
+        "conv3": 0.8930256962776184,
+        "conv4": 0.9088609218597412,
+        "fc1": 0.9660158753395081,
+        "fc2": 0.801562488079071
+      },
+      "effective_macs": 6823640
+    },
+    {
+      "scope": "layer",
+      "target": 0.0,
+      "sparsity": 0.0,
+      "nonzero_params": 1044490,
+      "acc_before_ft": 0.9263,
+      "acc_after_ft": 0.9305,
+      "ft_time_s": 63.26835291700081,
+      "per_layer": {
+        "conv1": 0.0,
+        "conv2": 0.0,
+        "conv3": 0.0,
+        "conv4": 0.0,
+        "fc1": 0.0,
+        "fc2": 0.0
+      },
+      "effective_macs": 58832640
+    },
+    {
+      "scope": "layer",
+      "target": 0.25,
+      "sparsity": 0.25,
+      "nonzero_params": 783490,
+      "acc_before_ft": 0.9235,
+      "acc_after_ft": 0.931,
+      "ft_time_s": 63.789669167000284,
+      "per_layer": {
+        "conv1": 0.25,
+        "conv2": 0.25,
+        "conv3": 0.25,
+        "conv4": 0.25,
+        "fc1": 0.25,
+        "fc2": 0.25
+      },
+      "effective_macs": 44124480
+    },
+    {
+      "scope": "layer",
+      "target": 0.5,
+      "sparsity": 0.5,
+      "nonzero_params": 522490,
+      "acc_before_ft": 0.9089,
+      "acc_after_ft": 0.9328,
+      "ft_time_s": 64.44373758300026,
+      "per_layer": {
+        "conv1": 0.5,
+        "conv2": 0.5,
+        "conv3": 0.5,
+        "conv4": 0.5,
+        "fc1": 0.5,
+        "fc2": 0.5
+      },
+      "effective_macs": 29416320
+    },
+    {
+      "scope": "layer",
+      "target": 0.75,
+      "sparsity": 0.75,
+      "nonzero_params": 261490,
+      "acc_before_ft": 0.8325,
+      "acc_after_ft": 0.9301,
+      "ft_time_s": 63.367742709000595,
+      "per_layer": {
+        "conv1": 0.75,
+        "conv2": 0.75,
+        "conv3": 0.75,
+        "conv4": 0.75,
+        "fc1": 0.75,
+        "fc2": 0.75
+      },
+      "effective_macs": 14708160
+    },
+    {
+      "scope": "layer",
+      "target": 0.9,
+      "sparsity": 0.8999990421455939,
+      "nonzero_params": 104891,
+      "acc_before_ft": 0.1227,
+      "acc_after_ft": 0.9084,
+      "ft_time_s": 63.16319179099992,
+      "per_layer": {
+        "conv1": 0.8993055820465088,
+        "conv2": 0.9000108242034912,
+        "conv3": 0.8999972939491272,
+        "conv4": 0.8999972939491272,
+        "fc1": 0.8999994993209839,
+        "fc2": 0.8999999761581421
+      },
+      "effective_macs": 5883381
+    },
+    {
+      "scope": "layer",
+      "target": 0.95,
+      "sparsity": 0.95,
+      "nonzero_params": 52690,
+      "acc_before_ft": 0.1,
+      "acc_after_ft": 0.8384,
+      "ft_time_s": 63.48448158300016,
+      "per_layer": {
+        "conv1": 0.9513888955116272,
+        "conv2": 0.9499782919883728,
+        "conv3": 0.9500054121017456,
+        "conv4": 0.9499986171722412,
+        "fc1": 0.9499997496604919,
+        "fc2": 0.949999988079071
+      },
+      "effective_macs": 2941592
+    }
+  ],
+  "structured": [
+    {
+      "filter_fraction": 0.1,
+      "channels": [
+        29,
+        58,
+        115,
+        115
+      ],
+      "params": 917469,
+      "param_reduction": 0.12161054677402372,
+      "macs": 47890156,
+      "acc_before_ft": 0.9262,
+      "acc_after_ft": 0.9326,
+      "ft_time_s": 68.20745337500011
+    },
+    {
+      "filter_fraction": 0.25,
+      "channels": [
+        24,
+        48,
+        96,
+        96
+      ],
+      "params": 738794,
+      "param_reduction": 0.29267489396739077,
+      "macs": 33286784,
+      "acc_before_ft": 0.9238,
+      "acc_after_ft": 0.9316,
+      "ft_time_s": 52.11633633399924
+    },
+    {
+      "filter_fraction": 0.5,
+      "channels": [
+        16,
+        32,
+        64,
+        64
+      ],
+      "params": 463050,
+      "param_reduction": 0.5566735918965237,
+      "macs": 14966272,
+      "acc_before_ft": 0.8931,
+      "acc_after_ft": 0.9291,
+      "ft_time_s": 33.763135415999386
+    }
+  ],
+  "baseline_acc": 0.9263,
+  "baseline_params": 1044490
+}

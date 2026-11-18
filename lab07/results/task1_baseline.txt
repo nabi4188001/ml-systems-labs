@@ -1,0 +1,35 @@
+=== TASK 1: OVERSIZED BASELINE (BigCNN, Adam lr=0.001, batch 128, 8 epochs) ===
+Training device: mps | latency device: CPU (8 threads), PyTorch 2.3.1
+
+Architecture: conv(1->32) conv(32->64) pool conv(64->128) conv(128->128) pool fc(6272->128) dropout fc(128->10)
+
+Layer    | Parameters
+------------------------
+conv1    | 320
+conv2    | 18,496
+conv3    | 73,856
+conv4    | 147,584
+fc1      | 802,944
+fc2      | 1,290
+------------------------
+Total    | 1,044,490
+
+Epoch  | Train loss | Val acc | Time (s)
+------------------------------------------
+1      | 0.4931     | 0.8716  | 28.5
+2      | 0.2886     | 0.9042  | 22.6
+3      | 0.2346     | 0.9142  | 21.8
+4      | 0.2003     | 0.9238  | 22.0
+5      | 0.1729     | 0.9260  | 22.1
+6      | 0.1522     | 0.9280  | 21.9
+7      | 0.1315     | 0.9234  | 22.7
+8      | 0.1163     | 0.9322  | 26.2
+------------------------------------------
+
+Test accuracy:            0.9263
+Parameters:               1,044,490
+Size on disk (fp32, .pt): 3.99 MiB (4,181,490 bytes)
+MACs per image:           58.8 M
+CPU latency, batch 1:     0.715 ms median (p90 1.313 ms), 1 thread: 1.222 ms
+CPU latency, batch 256:   115.72 ms (452.0 us/image)
+Training time:            188 s

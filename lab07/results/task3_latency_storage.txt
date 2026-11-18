@@ -1,0 +1,42 @@
+=== TASK 3: LATENCY AND ON-DISK SIZE ===
+CPU: 8 cores, 8 PyTorch threads, PyTorch 2.3.1. Latency = median of 500 (batch 1) / 40 (batch 256) timed forward passes after warm-up.
+Unstructured models are executed as ordinary dense PyTorch models (zeros are stored and multiplied).
+
+--- Latency ---
+Model                        | Sparsity | Test acc | Dense MACs (M) | Non-zero MACs (M) | b1 (ms) | b1 1-thr (ms) | b256 (ms) | Speed-up b256
+--------------------------------------------------------------------------------------------------------------------------------------------
+Unstructured global 0%       | 0.000    | 0.9305   | 58.8           | 58.8              | 0.704   | 0.958         | 109.88    | 1.00x
+Unstructured global 25%      | 0.250    | 0.9305   | 58.8           | 52.7              | 0.933   | 0.979         | 109.12    | 1.01x
+Unstructured global 50%      | 0.500    | 0.9325   | 58.8           | 44.3              | 0.664   | 0.963         | 110.86    | 0.99x
+Unstructured global 75%      | 0.750    | 0.9331   | 58.8           | 26.3              | 0.728   | 0.961         | 110.10    | 1.00x
+Unstructured global 90%      | 0.900    | 0.9312   | 58.8           | 12.3              | 0.664   | 0.967         | 108.81    | 1.01x
+Unstructured global 95%      | 0.950    | 0.9232   | 58.8           | 6.8               | 0.886   | 0.994         | 110.22    | 1.00x
+Structured 10% filters       | 0.122    | 0.9326   | 47.9           | 47.9              | 0.635   | 0.917         | 96.21     | 1.14x
+Structured 25% filters       | 0.293    | 0.9316   | 33.3           | 33.3              | 0.579   | 0.741         | 77.98     | 1.41x
+Structured 50% filters       | 0.557    | 0.9291   | 15.0           | 15.0              | 0.347   | 0.503         | 49.20     | 2.23x
+
+--- On-disk size (torch.save of the state_dict) ---
+Dense = fp32 tensors with zeros stored. COO = int64 row+col index per non-zero + fp32 value. CSR = int64 col index per non-zero + fp32 value + row pointers. gzip = zlib level 9 of the dense file.
+Model                        | Non-zero params | Dense (MiB) | COO (MiB) | CSR (MiB) | gzip dense (MiB) | Best vs dense baseline
+----------------------------------------------------------------------------------------------------------------------------------
+Unstructured global 0%       | 1,044,490       | 3.99        | 19.92     | 11.96     | 3.71             | 1.08x smaller
+Unstructured global 25%      | 783,490         | 3.99        | 14.94     | 8.97      | 3.03             | 1.32x smaller
+Unstructured global 50%      | 522,490         | 3.99        | 9.96      | 5.99      | 2.17             | 1.84x smaller
+Unstructured global 75%      | 261,490         | 3.99        | 4.98      | 3.00      | 1.27             | 3.14x smaller
+Unstructured global 90%      | 104,890         | 3.99        | 2.00      | 1.21      | 0.68             | 5.84x smaller
+Unstructured global 95%      | 52,690          | 3.99        | 1.00      | 0.61      | 0.46             | 8.59x smaller
+Structured 10% filters       | 917,469         | 3.50        | -         | -         | 3.25             | 1.23x smaller
+Structured 25% filters       | 738,794         | 2.82        | -         | -         | 2.62             | 1.52x smaller
+Structured 50% filters       | 463,050         | 1.77        | -         | -         | 1.65             | 2.42x smaller
+
+--- Kernel micro-benchmark: fc1-shaped W (128 x 6272) times X (6272 x batch) ---
+Sparsity | Dense b1 (us) | CSR b1 (us) | CSR/dense b1 | Dense b256 (ms) | CSR b256 (ms) | CSR/dense b256
+---------------------------------------------------------------------------------------------------------
+0.0      | 20.3          | 7802.9      | 383.74       | 0.485           | 24.612        | 50.71
+0.25     | 20.7          | 5894.0      | 284.62       | 0.464           | 20.048        | 43.25
+0.5      | 20.6          | 3905.9      | 189.38       | 0.467           | 13.893        | 29.73
+0.75     | 20.5          | 1964.1      | 95.81        | 0.457           | 8.705         | 19.05
+0.9      | 20.6          | 818.3       | 39.72        | 0.559           | 3.026         | 5.41
+0.95     | 20.6          | 410.9       | 19.92        | 0.867           | 1.865         | 2.15
+0.98     | 20.6          | 167.0       | 8.09         | 0.874           | 0.599         | 0.69
+0.99     | 20.6          | 85.2        | 4.13         | 0.477           | 0.324         | 0.68

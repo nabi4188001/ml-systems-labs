@@ -1,0 +1,37 @@
+=== TASK 2: MAGNITUDE PRUNING of BigCNN (baseline test acc 0.9263, 1,044,490 params) ===
+Fine-tuning: 3 epochs, Adam lr=0.0005, masks fixed (torch.nn.utils.prune, weight = weight_orig * mask).
+Sparsity = fraction of zero conv/linear weights (biases not pruned). Accuracy = test set (10,000 images).
+
+--- Unstructured magnitude pruning ---
+Scope   | Target | Measured | Non-zero params | Acc before FT | Acc after FT | Change vs baseline
+----------------------------------------------------------------------------------------------------
+global  | 0.0    | 0.0000   | 1,044,490       | 0.9263        | 0.9305       | +0.42 pts
+global  | 0.25   | 0.2500   | 783,490         | 0.9265        | 0.9305       | +0.42 pts
+global  | 0.5    | 0.5000   | 522,490         | 0.9252        | 0.9325       | +0.62 pts
+global  | 0.75   | 0.7500   | 261,490         | 0.9220        | 0.9331       | +0.68 pts
+global  | 0.9    | 0.9000   | 104,890         | 0.8755        | 0.9312       | +0.49 pts
+global  | 0.95   | 0.9500   | 52,690          | 0.7015        | 0.9232       | -0.31 pts
+layer   | 0.0    | 0.0000   | 1,044,490       | 0.9263        | 0.9305       | +0.42 pts
+layer   | 0.25   | 0.2500   | 783,490         | 0.9235        | 0.9310       | +0.47 pts
+layer   | 0.5    | 0.5000   | 522,490         | 0.9089        | 0.9328       | +0.65 pts
+layer   | 0.75   | 0.7500   | 261,490         | 0.8325        | 0.9301       | +0.38 pts
+layer   | 0.9    | 0.9000   | 104,891         | 0.1227        | 0.9084       | -1.79 pts
+layer   | 0.95   | 0.9500   | 52,690          | 0.1000        | 0.8384       | -8.79 pts
+----------------------------------------------------------------------------------------------------
+
+Per-layer sparsity chosen by GLOBAL pruning (layer-wise gives every layer the target):
+Target | conv1  | conv2  | conv3  | conv4  | fc1    | fc2   
+----------------------------------------------------------------
+0.0    | 0.000  | 0.000  | 0.000  | 0.000  | 0.000  | 0.000 
+0.25   | 0.000  | 0.074  | 0.096  | 0.118  | 0.293  | 0.045 
+0.5    | 0.021  | 0.183  | 0.230  | 0.282  | 0.573  | 0.109 
+0.75   | 0.076  | 0.441  | 0.536  | 0.613  | 0.803  | 0.328 
+0.9    | 0.170  | 0.711  | 0.796  | 0.829  | 0.928  | 0.637 
+0.95   | 0.229  | 0.831  | 0.893  | 0.909  | 0.966  | 0.802 
+
+--- Structured pruning: whole conv filters removed by L2 norm (model physically rebuilt smaller) ---
+Filters removed | Channels (c1,c2,c3,c4) | Params    | Param reduction | MACs (M) | Acc before FT | Acc after FT | Change
+------------------------------------------------------------------------------------------------------------------------
+10%             | (29, 58, 115, 115)     | 917,469   | 12.2%           | 47.9     | 0.9262        | 0.9326       | +0.63 pts
+25%             | (24, 48, 96, 96)       | 738,794   | 29.3%           | 33.3     | 0.9238        | 0.9316       | +0.53 pts
+50%             | (16, 32, 64, 64)       | 463,050   | 55.7%           | 15.0     | 0.8931        | 0.9291       | +0.28 pts

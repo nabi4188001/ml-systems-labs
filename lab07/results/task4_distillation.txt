@@ -1,0 +1,24 @@
+=== TASK 4: KNOWLEDGE DISTILLATION (T=4.0, alpha=0.5, 10 epochs, Adam lr=0.001, seeds [0, 1, 2]) ===
+Loss = alpha * CE(student, labels) + (1 - alpha) * T^2 * KL(p_teacher^T || q_student^T)
+Plain student = same architecture, same seeds and initial weights, same data order, loss = CE only.
+Teacher soft targets: mean max-probability 0.959 at T=1 vs 0.755 at T=4 (T=4 exposes the 'dark knowledge' in the non-max classes).
+Teacher accuracy on the training split: 0.9743
+
+Student architecture: conv(1->16) conv(16->32) pool conv(32->64) pool fc(3136->24) fc(24->10)
+
+Seed  | Plain test acc | Distilled test acc | Difference
+------------------------------------------------------------
+0     | 0.9136         | 0.9175             | +0.39 pts
+1     | 0.9166         | 0.9194             | +0.28 pts
+2     | 0.9142         | 0.9174             | +0.32 pts
+------------------------------------------------------------
+Mean  | 0.9148         | 0.9181             | +0.33 pts
+Std   | 0.0016         | 0.0011             |
+
+Model                | Params    | Size (MiB) | MACs (M) | b1 (ms) | b1 1-thr (ms) | b256 (ms) | Test acc
+----------------------------------------------------------------------------------------------------------------
+Teacher (BigCNN)     | 1,044,490 | 3.988      | 58.8     | 0.747   | 1.005         | 111.06    | 0.9263
+Student plain        | 98,834    | 0.380      | 7.4      | 0.304   | 0.356         | 38.70     | 0.9148 (mean of 3)
+Student distilled    | 98,834    | 0.380      | 7.4      | 0.304   | 0.356         | 38.70     | 0.9181 (mean of 3)
+----------------------------------------------------------------------------------------------------------------
+Student vs teacher: 10.6x fewer parameters, 7.9x fewer MACs, 2.9x faster at batch 256, 2.5x faster at batch 1.
