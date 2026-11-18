@@ -1,0 +1,13 @@
+=== TASK 3: num_workers STUDY (one epoch, batch 128) ===
+Machine: 2 CPU cores | torch threads 2 | device cpu
+Compute-only throughput (batches already in memory): 7855 samples/s
+
+num_workers | Loading only (samples/s) | First batch (s) | Full training (samples/s) | Speed-up vs 0
+----------------------------------------------------------------------------------------------------
+0           | 13950                    | 0.012           | 5007                      | 1.00x
+1           | 9871                     | 0.431           | 4120                      | 0.82x
+2           | 19894                    | 0.057           | 4394                      | 0.88x
+4           | 19376                    | 0.068           | 4129                      | 0.82x
+8           | 19697                    | 0.159           | 4158                      | 0.83x
+----------------------------------------------------------------------------------------------------
+Best full-training throughput: num_workers=0 (5007 samples/s)

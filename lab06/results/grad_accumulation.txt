@@ -1,0 +1,22 @@
+=== TASK 6: GRADIENT ACCUMULATION (SimpleCNN, Adam lr=0.001, 5 epochs) ===
+Effective batch 256 emulated with micro-batch 64 and 4 accumulation steps.
+Each micro-batch loss is weighted by its share of samples, then one optimizer step per group.
+
+One-step gradient check on the same 256 samples: max abs difference = 9.31e-08
+
+Run                                      | Optimizer steps/epoch | Final train loss | Final val acc | Test acc | Samples/s
+------------------------------------------------------------------------------------------------------------------------
+Batch 256                                | 215                   | 0.2949           | 0.8924        | 0.8856   | 4502
+Batch 64 x accumulation 4                | 215                   | 0.2949           | 0.8920        | 0.8859   | 4401
+Batch 64 (no accumulation, reference)    | 860                   | 0.2404           | 0.9070        | 0.9002   | 4165
+------------------------------------------------------------------------------------------------------------------------
+
+Per-epoch train loss / val acc:
+Epoch  | Batch 256            | Batch 64 x accum 4   | Batch 64
+1      | 0.6175 / 0.8552      | 0.6175 / 0.8548      | 0.4752 / 0.8748
+2      | 0.3873 / 0.8654      | 0.3873 / 0.8654      | 0.3198 / 0.8906
+3      | 0.3410 / 0.8772      | 0.3409 / 0.8774      | 0.2814 / 0.8934
+4      | 0.3139 / 0.8818      | 0.3139 / 0.8812      | 0.2565 / 0.9018
+5      | 0.2949 / 0.8924      | 0.2949 / 0.8920      | 0.2404 / 0.9070
+
+Batch 256 vs batch 64 x accum 4: max train-loss difference 5.57e-05, max val-acc difference 0.0006

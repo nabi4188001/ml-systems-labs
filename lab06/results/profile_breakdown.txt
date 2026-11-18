@@ -1,0 +1,31 @@
+=== TASK 2: PROFILE OF ONE TRAINING EPOCH (torch.profiler) ===
+Model: SimpleCNN | batch 128 | num_workers 0 | 430 batches | device cpu | torch threads 2
+Elapsed time incl. the profiler post-processing each chunk: 169.35 s (training phases alone: 12.88 s)
+
+Phase            | Profiler (ms) | Share   | Wall clock (ms) | Share
+----------------------------------------------------------------------
+data_loading     | 5732.6        | 44.6  % | 5735.8          | 44.5%
+forward          | 4191.6        | 32.6  % | 4200.0          | 32.6%
+backward         | 2682.4        | 20.9  % | 2692.1          | 20.9%
+optimizer_step   | 246.2         | 1.9   % | 253.0           | 2.0%
+----------------------------------------------------------------------
+Total            | 12852.8       | 100.0%  | 12880.9         | 100.0%
+
+Top 15 operators by self CPU time (whole epoch):
+Operator                                 | Self CPU (ms) | Share   | Calls
+---------------------------------------------------------------------------
+enumerate(DataLoader)#_SingleProcessData | 4283.9        | 34.3  % | 430
+aten::max_pool2d_with_indices            | 2550.7        | 20.4  % | 860
+aten::convolution_backward               | 1597.0        | 12.8  % | 860
+aten::mkldnn_convolution                 | 994.0         | 7.9   % | 860
+aten::threshold_backward                 | 373.1         | 3.0   % | 860
+aten::_to_copy                           | 335.4         | 2.7   % | 175320
+aten::max_pool2d_with_indices_backward   | 223.6         | 1.8   % | 860
+aten::clamp_min                          | 214.1         | 1.7   % | 860
+aten::eq                                 | 196.7         | 1.6   % | 55000
+aten::div                                | 134.5         | 1.1   % | 57580
+aten::to                                 | 130.9         | 1.0   % | 397040
+aten::fill_                              | 130.8         | 1.0   % | 1720
+aten::any                                | 123.2         | 1.0   % | 55000
+Optimizer.step#Adam.step                 | 113.2         | 0.9   % | 430
+aten::clone                              | 105.3         | 0.8   % | 55000

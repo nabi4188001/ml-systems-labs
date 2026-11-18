@@ -1,0 +1,39 @@
+# ==========================================
+# Lab 6: Single YAML config for the training pipeline
+# Best model from Lab 3: SimpleCNN on Fashion-MNIST (88.61% test accuracy)
+# ==========================================
+seed: 42
+
+data:
+  dir: data                 # Relative to the repo root (same folder as Lab 3)
+  val_size: 5000            # 55k train / 5k val split, as in Lab 3
+  batch_size: 128
+  num_workers: 0
+
+model:
+  name: SimpleCNN
+
+training:
+  epochs: 10
+  optimizer: adam           # adam | sgd
+  lr: 0.001
+  momentum: 0.9             # Used by SGD only
+  weight_decay: 0.0
+  scheduler: none           # none | step | cosine | plateau
+  step_size: 4              # StepLR
+  gamma: 0.1                # StepLR
+  plateau_factor: 0.1       # ReduceLROnPlateau
+  plateau_patience: 1       # ReduceLROnPlateau
+  grad_accum_steps: 1       # >1 enables gradient accumulation
+  stop_after_epoch: null    # Simulates an interruption after this epoch (Task 7)
+
+checkpoint:
+  dir: lab06/results/checkpoints   # Relative to the repo root
+  name: cnn_pipeline
+  resume: false             # Resume from <dir>/<name>_last.pt if it exists
+  log_to_mlflow: true       # Also store the checkpoint as an MLflow artifact
+
+mlflow:
+  tracking_uri: lab06/mlruns       # Relative to the repo root
+  experiment: lab06_pipeline
+  run_name: cnn_adam_baseline

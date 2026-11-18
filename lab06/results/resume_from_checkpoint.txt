@@ -1,0 +1,19 @@
+=== TASK 7: INTERRUPT AT EPOCH 3 AND RESUME FROM CHECKPOINT ===
+Process 1 trained epochs 1-3 and exited; process 2 loaded cnn_resume_last.pt (model, optimizer, RNG states, history, MLflow run id) and trained epochs 4-10.
+Reference: the uninterrupted Task 1 run with the same config and seed.
+
+Epoch  | Ref train loss | Resumed train loss | Ref val acc | Resumed val acc | Segment
+------------------------------------------------------------------------------------------
+1      | 0.529481       | 0.529481           | 0.8478      | 0.8478          | before interruption
+2      | 0.348013       | 0.348013           | 0.8792      | 0.8792          | before interruption
+3      | 0.305024       | 0.305024           | 0.8794      | 0.8794          | before interruption
+4      | 0.280798       | 0.280798           | 0.8932      | 0.8932          | after resume
+5      | 0.263650       | 0.263650           | 0.8954      | 0.8954          | after resume
+6      | 0.247123       | 0.247123           | 0.9016      | 0.9016          | after resume
+7      | 0.236744       | 0.236744           | 0.9066      | 0.9066          | after resume
+8      | 0.225552       | 0.225552           | 0.9058      | 0.9058          | after resume
+9      | 0.219359       | 0.219359           | 0.9078      | 0.9078          | after resume
+10     | 0.207952       | 0.207952           | 0.9064      | 0.9064          | after resume
+------------------------------------------------------------------------------------------
+Max abs train-loss difference vs uninterrupted run: 0.00e+00
+Max abs val-acc difference vs uninterrupted run:    0.0000
